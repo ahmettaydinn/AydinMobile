@@ -3,15 +3,32 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/Home';
-import ProfileScreen from './screens/Profile';
+import GameScreen from './screens/Game';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={ProfileScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: () => (
+            <Icon name="home-outline" color="#4F8EF7" size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Game"
+        component={GameScreen}
+        options={{
+          tabBarIcon: () => (
+            <Icon name="game-controller-outline" color="#4F8EF7" size={24} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
