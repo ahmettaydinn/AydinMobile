@@ -1,4 +1,4 @@
-[
+export const similarWords = [
   {word: 'Through', sentence: 'We passed _ the forest'},
   {word: 'Though', sentence: 'He is stupid, I like him _'},
   {word: 'Tough', sentence: 'Wrestler girl is _'},

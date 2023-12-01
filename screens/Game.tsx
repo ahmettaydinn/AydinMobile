@@ -1,54 +1,82 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
+import {similarWords} from '../data/similar';
 
 const Profile = () => {
   const [score, setScore] = useState(0);
   const [currentWord, setCurrentWord] = useState('');
+  const [matchedWords, setMatchedWords] = useState([]);
+  const haveFinished = matchedWords.length === similarWords.length;
+  console.log('haveFinished', haveFinished);
   return (
     <View
       style={{
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row',
+        borderWidth: 3,
+        borderColor: 'blue',
         flex: 1,
       }}>
-      <View style={{borderWidth: 3, padding: 20}}>
-        <View>
-          <Text>Through</Text>
-        </View>
-        <View>
-          <Text>Though</Text>
-        </View>
-        <View>
-          <Text>Tough</Text>
-        </View>
+      {similarWords.map(word => {
+        const foundWord = matchedWords.find(wd => wd === word.word);
+        console.log(foundWord);
 
-        <View>
-          <Text>Thought</Text>
-        </View>
-        <View>
-          <Text>Thorough</Text>
-        </View>
-      </View>
-      {/*  */}
-      <View style={{borderWidth: 3, padding: 20}}>
-        <View>
-          <Text>we passed _ the forest</Text>
-        </View>
-        <View>
-          <Text>He is stupid, I like him _</Text>
-        </View>
-        <View>
-          <Text>Wrestler girl is _</Text>
-        </View>
+        return (
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 20,
+            }}>
+            <View style={{width: '50%'}}>
+              <Pressable onPress={() => setCurrentWord(word.word)}>
+                <View
+                  style={{
+                    borderWidth: 3,
+                    padding: 20,
+                    gap: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 100,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginBottom: 10,
+                    backgroundColor: foundWord ? 'red' : '',
+                  }}>
+                  <Text>{word.word}</Text>
+                </View>
+              </Pressable>
+            </View>
 
-        <View>
-          <Text>I _ about your offer </Text>
-        </View>
-        <View>
-          <Text>Everything is perfect. You plan was _</Text>
-        </View>
-      </View>
+            {/*  */}
+            <View style={{width: '50%'}}>
+              <Pressable
+                onPress={() => {
+                  if (currentWord === word.word) {
+                    const updatedMatchedWords = [...matchedWords];
+                    updatedMatchedWords.push(word.word);
+                    setMatchedWords(updatedMatchedWords);
+                  } else {
+                    return;
+                  }
+                }}>
+                <View
+                  style={{
+                    borderWidth: 3,
+                    padding: 20,
+                    gap: 20,
+                    height: 100,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginBottom: 10,
+                    backgroundColor: foundWord ? 'red' : '',
+                  }}>
+                  <Text>{word.sentence}</Text>
+                </View>
+              </Pressable>
+            </View>
+          </View>
+        );
+      })}
     </View>
   );
 };
