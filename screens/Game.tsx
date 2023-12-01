@@ -7,7 +7,8 @@ const Profile = () => {
   const [currentWord, setCurrentWord] = useState('');
   const [matchedWords, setMatchedWords] = useState([]);
   const haveFinished = matchedWords.length === similarWords.length;
-  console.log('haveFinished', haveFinished);
+  console.log('currentWord', currentWord);
+
   return (
     <View
       style={{
@@ -19,7 +20,7 @@ const Profile = () => {
       }}>
       {similarWords.map(word => {
         const foundWord = matchedWords.find(wd => wd === word.word);
-        console.log(foundWord);
+        console.log(currentWord === word.word);
 
         return (
           <View
@@ -28,7 +29,10 @@ const Profile = () => {
               gap: 20,
             }}>
             <View style={{width: '50%'}}>
-              <Pressable onPress={() => setCurrentWord(word.word)}>
+              <Pressable
+                onPress={() =>
+                  setCurrentWord(currentWord === word.word ? '' : word.word)
+                }>
                 <View
                   style={{
                     borderWidth: 3,
@@ -40,7 +44,8 @@ const Profile = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginBottom: 10,
-                    backgroundColor: foundWord ? 'red' : '',
+                    backgroundColor:
+                      currentWord === word.word || foundWord ? 'red' : 'white',
                   }}>
                   <Text>{word.word}</Text>
                 </View>
