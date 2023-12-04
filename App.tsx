@@ -2,11 +2,37 @@ import React from 'react';
 // import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './screens/Home';
 import GameScreen from './screens/Game';
 import Icon from 'react-native-vector-icons/Ionicons';
+import SimilarWords from './screens/SimilarWords';
+import ChooseGame from './screens/ChooseGame';
 
 const Tab = createBottomTabNavigator();
+const GameStack = createNativeStackNavigator();
+
+function GameStackScreen() {
+  return (
+    <GameStack.Navigator>
+      <GameStack.Screen
+        name="Games"
+        component={ChooseGame}
+        options={{
+          tabBarIcon: () => (
+            <Icon name="game-controller-outline" color="#4F8EF7" size={24} />
+          ),
+          headerShown: false,
+        }}
+      />
+      <GameStack.Screen
+        name="SimilarWords"
+        component={SimilarWords}
+        // options={{tabBarLabel: 'Game!'}}
+      />
+    </GameStack.Navigator>
+  );
+}
 
 function MyTabs() {
   return (
@@ -21,8 +47,8 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Game"
-        component={GameScreen}
+        name="Games"
+        component={GameStackScreen}
         options={{
           tabBarIcon: () => (
             <Icon name="game-controller-outline" color="#4F8EF7" size={24} />

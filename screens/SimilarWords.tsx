@@ -1,9 +1,18 @@
 import React, {useState} from 'react';
-import {Button, Pressable, SafeAreaView, Text, View} from 'react-native';
+import {
+  Alert,
+  Button,
+  Modal,
+  Pressable,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
 import {similarWords} from '../data/similar';
 import {useNavigation} from '@react-navigation/native';
+import End from '../components/SimilarWords/End';
 
-const Profile = () => {
+const SimilarWords = () => {
   const navigation = useNavigation();
 
   const [score, setScore] = useState(0);
@@ -11,7 +20,11 @@ const Profile = () => {
   const [matchedWords, setMatchedWords] = useState([]);
   const haveFinished = matchedWords.length === similarWords.length;
   const [part, setPart] = useState(0);
+  const [endModalVisibility, setEndModalVisibility] = useState(false);
+  console.log(endModalVisibility);
 
+  console.log('similarWords.length', similarWords.length);
+  console.log('part', part);
   return (
     <SafeAreaView
       style={{
@@ -90,7 +103,7 @@ const Profile = () => {
           </View>
         );
       })}
-      {similarWords.length - 1 === part ? (
+      {similarWords.length - 1 !== part ? (
         <Button
           title="Next"
           disabled={!haveFinished}
@@ -108,13 +121,33 @@ const Profile = () => {
           title="End"
           onPress={() => {
             if (haveFinished) {
-              navigation.goBack();
+              setEndModalVisibility(true);
             }
           }}
         />
       )}
+
+      {/* ---------- */}
+      <Modal
+        animationType="slide"
+        // transparent={true}
+        visible={endModalVisibility}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setEndModalVisibility(!endModalVisibility);
+        }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 22,
+          }}>
+          <End />
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
 
-export default Profile;
+export default SimilarWords;
