@@ -44,6 +44,7 @@ function MyTabs() {
           tabBarIcon: () => (
             <Icon name="home-outline" color="#4F8EF7" size={24} />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -53,6 +54,7 @@ function MyTabs() {
           tabBarIcon: () => (
             <Icon name="game-controller-outline" color="#4F8EF7" size={24} />
           ),
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

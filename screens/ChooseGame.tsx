@@ -5,43 +5,45 @@ const ChooseGame = () => {
   const navigation = useNavigation();
   return (
     <View style={{flex: 1}}>
+      <Text style={{fontSize: 30, textAlign: 'center', marginTop: 20}}>
+        Choose Game
+      </Text>
       <View
         style={{
           width: '100%',
-          borderWidth: 2,
+          // borderWidth: 2,
           flexDirection: 'row',
           justifyContent: 'space-around',
           height: '50%',
           alignItems: 'center',
         }}>
-        <View>
+        <View style={{borderWidth: 2, padding: 30, width: '40%'}}>
           <Pressable
-            style={{borderWidth: 2, padding: 30}}
             onPress={() => {
               navigation.navigate('SimilarWords');
             }}>
             <Text>Similar Words</Text>
           </Pressable>
         </View>
-        <View>
-          <Text>Game 2</Text>
+        <View style={{borderWidth: 2, padding: 30, width: '40%'}}>
+          <Text style={{textAlign: 'center'}}>Game 3</Text>
         </View>
       </View>
       {/* ----------------------------------- */}
       <View
         style={{
           width: '100%',
-          borderWidth: 2,
+          // borderWidth: 2,
           flexDirection: 'row',
           justifyContent: 'space-around',
           height: '50%',
           alignItems: 'center',
         }}>
-        <View>
-          <Text>Game 3</Text>
+        <View style={{borderWidth: 2, padding: 30, width: '40%'}}>
+          <Text style={{textAlign: 'center'}}>Game 3</Text>
         </View>
-        <View>
-          <Text>Game 4</Text>
+        <View style={{borderWidth: 2, padding: 30, width: '40%'}}>
+          <Text style={{textAlign: 'center'}}>Game 3</Text>
         </View>
       </View>
     </View>
