@@ -1,52 +1,72 @@
+import {Box, Center, Pressable, Text} from '@gluestack-ui/themed';
 import {useNavigation} from '@react-navigation/native';
-import {Pressable, Text, View} from 'react-native';
+import React from 'react';
 
 const ChooseGame = () => {
   const navigation = useNavigation();
+
+  const navigateSimilarWords = () => {
+    navigation.navigate('SimilarWords');
+  };
   return (
-    <View style={{flex: 1}}>
-      <Text style={{fontSize: 30, textAlign: 'center', marginTop: 20}}>
-        Choose Game
-      </Text>
-      <View
-        style={{
-          width: '100%',
-          // borderWidth: 2,
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          height: '50%',
-          alignItems: 'center',
-        }}>
-        <View style={{borderWidth: 2, padding: 30, width: '40%'}}>
+    <Center sx={{flex: 1}}>
+      <Box>
+        <Box sx={{flexDirection: 'row'}}>
           <Pressable
-            onPress={() => {
-              navigation.navigate('SimilarWords');
-            }}>
-            <Text>Similar Words</Text>
+            onPress={navigateSimilarWords}
+            bg="$pink600"
+            sx={{
+              borderWidth: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            p={20}
+            m={5}
+            w={150}
+            h={120}>
+            <Text color="white">Similar Words</Text>
           </Pressable>
-        </View>
-        <View style={{borderWidth: 2, padding: 30, width: '40%'}}>
-          <Text style={{textAlign: 'center'}}>Game 3</Text>
-        </View>
-      </View>
-      {/* ----------------------------------- */}
-      <View
-        style={{
-          width: '100%',
-          // borderWidth: 2,
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          height: '50%',
-          alignItems: 'center',
-        }}>
-        <View style={{borderWidth: 2, padding: 30, width: '40%'}}>
-          <Text style={{textAlign: 'center'}}>Game 3</Text>
-        </View>
-        <View style={{borderWidth: 2, padding: 30, width: '40%'}}>
-          <Text style={{textAlign: 'center'}}>Game 3</Text>
-        </View>
-      </View>
-    </View>
+          <Pressable
+            sx={{
+              borderWidth: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            p={20}
+            m={5}
+            w={150}
+            h={120}>
+            <Text>Game 2</Text>
+          </Pressable>
+        </Box>
+        <Box sx={{flexDirection: 'row'}}>
+          <Pressable
+            sx={{
+              borderWidth: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            p={20}
+            m={5}
+            w={150}
+            h={120}>
+            <Text>Game 3</Text>
+          </Pressable>
+          <Pressable
+            sx={{
+              borderWidth: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            p={20}
+            m={5}
+            w={150}
+            h={120}>
+            <Text>Game 4</Text>
+          </Pressable>
+        </Box>
+      </Box>
+    </Center>
   );
 };
 

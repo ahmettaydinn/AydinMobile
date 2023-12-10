@@ -3,10 +3,9 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 
 const Home = () => {
-  const [infoModalOpen, setInfoModalOpen] = useState(false);
   const navigation = useNavigation();
   const navigateToChooseGame = () => {
-    navigation.navigate('Games');
+    navigation.navigate('GamesStack');
   };
   const navigateToHowItWorks = () => {
     navigation.navigate('HowItWorks');

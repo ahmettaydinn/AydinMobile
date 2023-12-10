@@ -1,20 +1,20 @@
 import React, {useState} from 'react';
-import {Button, Pressable, SafeAreaView, Text, View} from 'react-native';
 import {similarWords} from '../data/similar';
 import {useNavigation} from '@react-navigation/native';
-
+import {Box, Pressable, Text} from '@gluestack-ui/themed';
+import {Button} from '@gluestack-ui/themed';
 const Profile = () => {
   const navigation = useNavigation();
 
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(0);
   const [currentWord, setCurrentWord] = useState('');
   const [matchedWords, setMatchedWords] = useState([]);
   const haveFinished = matchedWords.length === similarWords.length;
   const [part, setPart] = useState(0);
 
   return (
-    <SafeAreaView
-      style={{
+    <Box
+      sx={{
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 3,
@@ -22,25 +22,23 @@ const Profile = () => {
         flex: 1,
         padding: 20,
       }}>
-      <Text style={{fontSize: 36, marginBottom: 30}}>
-        {matchedWords.length}/4
-      </Text>
+      <Text sx={{fontSize: 36, marginBottom: 30}}>{matchedWords.length}/4</Text>
       {similarWords[part].map(word => {
         const foundWord = matchedWords.find(wd => wd === word.word);
 
         return (
-          <View
-            style={{
+          <Box
+            sx={{
               flexDirection: 'row',
               gap: 20,
             }}>
-            <View style={{width: '50%'}}>
+            <Box sx={{width: '50%'}}>
               <Pressable
                 onPress={() =>
                   setCurrentWord(currentWord === word.word ? '' : word.word)
                 }>
-                <View
-                  style={{
+                <Box
+                  sx={{
                     borderWidth: 3,
                     padding: 20,
                     gap: 20,
@@ -51,15 +49,17 @@ const Profile = () => {
                     alignItems: 'center',
                     marginBottom: 10,
                     backgroundColor:
-                      currentWord === word.word || foundWord ? 'red' : 'white',
+                      currentWord === word.word || foundWord
+                        ? '$pink600'
+                        : 'white',
                   }}>
                   <Text>{word.word}</Text>
-                </View>
+                </Box>
               </Pressable>
-            </View>
+            </Box>
 
             {/*  */}
-            <View style={{width: '50%'}}>
+            <Box sx={{width: '50%'}}>
               <Pressable
                 onPress={() => {
                   if (currentWord === word.word) {
@@ -72,8 +72,8 @@ const Profile = () => {
                     return;
                   }
                 }}>
-                <View
-                  style={{
+                <Box
+                  sx={{
                     borderWidth: 3,
                     padding: 20,
                     gap: 20,
@@ -81,18 +81,17 @@ const Profile = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginBottom: 10,
-                    backgroundColor: foundWord ? 'red' : 'white',
+                    backgroundColor: foundWord ? '$pink600' : 'white',
                   }}>
                   <Text>{word.sentence}</Text>
-                </View>
+                </Box>
               </Pressable>
-            </View>
-          </View>
+            </Box>
+          </Box>
         );
       })}
       {similarWords.length - 1 === part ? (
         <Button
-          title="Next"
           disabled={!haveFinished}
           onPress={() => {
             if (haveFinished) {
@@ -100,20 +99,21 @@ const Profile = () => {
               setCurrentWord('');
               setPart(part + 1);
             }
-          }}
-        />
+          }}>
+          Next
+        </Button>
       ) : (
         <Button
           disabled={!haveFinished}
-          title="End"
           onPress={() => {
             if (haveFinished) {
               navigation.goBack();
             }
-          }}
-        />
+          }}>
+          End
+        </Button>
       )}
-    </SafeAreaView>
+    </Box>
   );
 };
 

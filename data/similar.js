@@ -3,7 +3,6 @@ export const similarWords = [
     {word: 'Through', sentence: 'We passed _ the forest'},
     {word: 'Though', sentence: 'He is stupid, I like him _'},
     {word: 'Tough', sentence: 'Wrestler girl is _'},
-    {word: 'Thorough', sentence: 'Everything is perfect. You plan was _'},
   ],
 
   [
@@ -15,6 +14,8 @@ export const similarWords = [
       word: 'Raise',
       sentence: 'If you want some ice create, _ your hand now',
     },
+  ],
+  [
     {
       word: 'Bear',
 
@@ -36,6 +37,8 @@ export const similarWords = [
       word: 'Dessert',
       sentence: 'Maybe we should have chocolate ice cream for _.',
     },
+  ],
+  [
     {word: 'Break', sentence: 'Please don"t _ those expensive Italian vases.'},
     {
       word: 'Brake',
@@ -49,6 +52,8 @@ export const similarWords = [
       word: 'Prize',
       sentence: 'If you want to win the first _, you must practice harder. ',
     },
+  ],
+  [
     {
       word: 'Lose',
       sentence:

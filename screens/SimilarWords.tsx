@@ -1,78 +1,70 @@
 import React, {useState} from 'react';
-import {
-  Alert,
-  Button,
-  Modal,
-  Pressable,
-  SafeAreaView,
-  Text,
-  View,
-} from 'react-native';
 import {similarWords} from '../data/similar';
 import {useNavigation} from '@react-navigation/native';
-import End from '../components/SimilarWords/End';
-
+import {Box, ButtonText, Pressable, Text} from '@gluestack-ui/themed';
+import {Button} from '@gluestack-ui/themed';
 const SimilarWords = () => {
   const navigation = useNavigation();
 
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(0);
   const [currentWord, setCurrentWord] = useState('');
   const [matchedWords, setMatchedWords] = useState([]);
-  const haveFinished = matchedWords.length === similarWords.length;
   const [part, setPart] = useState(0);
-  const [endModalVisibility, setEndModalVisibility] = useState(false);
-  console.log(endModalVisibility);
+  const haveFinished = matchedWords.length === similarWords[part].length;
 
-  console.log('similarWords.length', similarWords.length);
-  console.log('part', part);
   return (
-    <SafeAreaView
-      style={{
+    <Box
+      sx={{
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 3,
-        borderColor: 'blue',
         flex: 1,
         padding: 20,
       }}>
-      <Text style={{fontSize: 36, marginBottom: 30}}>
-        {matchedWords.length}/4
+      <Text size="4xl" sx={{marginBottom: 30}}>
+        {matchedWords.length}/{similarWords[part].length}
       </Text>
       {similarWords[part].map(word => {
         const foundWord = matchedWords.find(wd => wd === word.word);
 
         return (
-          <View
-            style={{
+          <Box
+            sx={{
               flexDirection: 'row',
               gap: 20,
             }}>
-            <View style={{width: '50%'}}>
+            <Box sx={{width: '50%'}}>
               <Pressable
                 onPress={() =>
                   setCurrentWord(currentWord === word.word ? '' : word.word)
                 }>
-                <View
-                  style={{
+                <Box
+                  sx={{
                     borderWidth: 3,
-                    padding: 20,
+                    // padding: 20,
                     gap: 20,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: 100,
+                    height: 120,
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginBottom: 10,
                     backgroundColor:
-                      currentWord === word.word || foundWord ? 'red' : 'white',
+                      currentWord === word.word || foundWord
+                        ? '$pink600'
+                        : 'white',
                   }}>
-                  <Text>{word.word}</Text>
-                </View>
+                  <Text
+                    color={
+                      currentWord === word.word || foundWord ? 'white' : 'black'
+                    }>
+                    {word.word}
+                  </Text>
+                </Box>
               </Pressable>
-            </View>
+            </Box>
 
             {/*  */}
-            <View style={{width: '50%'}}>
+            <Box sx={{width: '50%'}}>
               <Pressable
                 onPress={() => {
                   if (currentWord === word.word) {
@@ -85,27 +77,29 @@ const SimilarWords = () => {
                     return;
                   }
                 }}>
-                <View
-                  style={{
+                <Box
+                  sx={{
                     borderWidth: 3,
-                    padding: 20,
+                    padding: 10,
                     gap: 20,
-                    height: 100,
+                    height: 120,
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginBottom: 10,
-                    backgroundColor: foundWord ? 'red' : 'white',
+                    backgroundColor: foundWord ? '$pink600' : 'white',
                   }}>
-                  <Text>{word.sentence}</Text>
-                </View>
+                  <Text color={foundWord ? 'white' : 'black'}>
+                    {word.sentence}
+                  </Text>
+                </Box>
               </Pressable>
-            </View>
-          </View>
+            </Box>
+          </Box>
         );
       })}
       {similarWords.length - 1 !== part ? (
         <Button
-          title="Next"
+          bg="$darkBlue800"
           disabled={!haveFinished}
           onPress={() => {
             if (haveFinished) {
@@ -113,40 +107,22 @@ const SimilarWords = () => {
               setCurrentWord('');
               setPart(part + 1);
             }
-          }}
-        />
+          }}>
+          <ButtonText> Next </ButtonText>
+        </Button>
       ) : (
         <Button
+          bg="$darkBlue800"
           disabled={!haveFinished}
-          title="End"
           onPress={() => {
             if (haveFinished) {
-              setEndModalVisibility(true);
+              navigation.goBack();
             }
-          }}
-        />
-      )}
-
-      {/* ---------- */}
-      <Modal
-        animationType="slide"
-        // transparent={true}
-        visible={endModalVisibility}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setEndModalVisibility(!endModalVisibility);
-        }}>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 22,
           }}>
-          <End />
-        </View>
-      </Modal>
-    </SafeAreaView>
+          <ButtonText> End </ButtonText>
+        </Button>
+      )}
+    </Box>
   );
 };
 
