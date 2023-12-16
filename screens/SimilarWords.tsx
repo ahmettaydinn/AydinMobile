@@ -3,6 +3,7 @@ import {similarWords} from '../data/similar';
 import {useNavigation} from '@react-navigation/native';
 import {Box, ButtonText, Pressable, Text} from '@gluestack-ui/themed';
 import {Button} from '@gluestack-ui/themed';
+
 const SimilarWords = () => {
   const navigation = useNavigation();
 
@@ -10,7 +11,8 @@ const SimilarWords = () => {
   const [currentWord, setCurrentWord] = useState('');
   const [matchedWords, setMatchedWords] = useState([]);
   const [part, setPart] = useState(0);
-  const haveFinished = matchedWords.length === similarWords[part].length;
+  const haveFinished =
+    matchedWords.length === similarWords[part].answers.length;
 
   return (
     <Box
@@ -21,21 +23,22 @@ const SimilarWords = () => {
         padding: 20,
       }}>
       <Text size="4xl" sx={{marginBottom: 30}}>
-        {matchedWords.length}/{similarWords[part].length}
+        {matchedWords.length}/{similarWords[part].answers.length}
       </Text>
-      {similarWords[part].map(word => {
-        const foundWord = matchedWords.find(wd => wd === word.word);
 
-        return (
-          <Box
-            sx={{
-              flexDirection: 'row',
-              gap: 20,
-            }}>
-            <Box sx={{width: '50%'}}>
+      <Box
+        sx={{
+          flexDirection: 'row',
+          gap: 20,
+          flex: 1,
+        }}>
+        <Box sx={{width: '50%'}}>
+          {similarWords[part].answers.map(answer => {
+            const foundWord = matchedWords.find(wd => wd === answer);
+            return (
               <Pressable
                 onPress={() =>
-                  setCurrentWord(currentWord === word.word ? '' : word.word)
+                  setCurrentWord(currentWord === answer ? '' : answer)
                 }>
                 <Box
                   sx={{
@@ -49,28 +52,35 @@ const SimilarWords = () => {
                     alignItems: 'center',
                     marginBottom: 10,
                     backgroundColor:
-                      currentWord === word.word || foundWord
+                      currentWord === answer || foundWord
                         ? '$pink600'
                         : 'white',
                   }}>
                   <Text
                     color={
-                      currentWord === word.word || foundWord ? 'white' : 'black'
+                      currentWord === answer || foundWord ? 'white' : 'black'
                     }>
-                    {word.word}
+                    {answer}
                   </Text>
                 </Box>
               </Pressable>
-            </Box>
+            );
+          })}
+        </Box>
 
-            {/*  */}
-            <Box sx={{width: '50%'}}>
+        {/*  */}
+        <Box sx={{width: '50%'}}>
+          {similarWords[part].sentences.map(sentenceObj => {
+            const foundWord = matchedWords.find(
+              wd => wd === sentenceObj.answer,
+            );
+            return (
               <Pressable
                 onPress={() => {
-                  if (currentWord === word.word) {
-                    if (!matchedWords.includes(word.word)) {
+                  if (currentWord === sentenceObj.answer) {
+                    if (!matchedWords.includes(sentenceObj.answer)) {
                       const updatedMatchedWords = [...matchedWords];
-                      updatedMatchedWords.push(word.word);
+                      updatedMatchedWords.push(sentenceObj.answer);
                       setMatchedWords(updatedMatchedWords);
                     }
                   } else {
@@ -89,14 +99,15 @@ const SimilarWords = () => {
                     backgroundColor: foundWord ? '$pink600' : 'white',
                   }}>
                   <Text color={foundWord ? 'white' : 'black'}>
-                    {word.sentence}
+                    {sentenceObj.sentence}
                   </Text>
                 </Box>
               </Pressable>
-            </Box>
-          </Box>
-        );
-      })}
+            );
+          })}
+        </Box>
+      </Box>
+
       {similarWords.length - 1 !== part ? (
         <Button
           bg="$darkBlue800"

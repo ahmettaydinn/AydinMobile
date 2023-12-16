@@ -1,25 +1,30 @@
-import {Box, Text} from '@gluestack-ui/themed';
-import {Center} from '@gluestack-ui/themed';
-import React from 'react';
+import {Box, Pressable, Text} from '@gluestack-ui/themed';
+import React, {useState} from 'react';
+import SimilarWordsInfoModal from '../components/similarWords/modals/similarWordsInfoModal';
 
 const HowItWorks = () => {
+  const [isSimModalOpen, setIsSimModalOpen] = useState(false);
+
   return (
     <Box sx={{flex: 1, justifyContent: 'space-around'}}>
+      <Pressable onPress={() => setIsSimModalOpen(true)}>
+        <Box
+          bg="$backgroundLight200"
+          p="$5"
+          h={120}
+          sx={{justifyContent: 'center', alignItems: 'center'}}>
+          <Text color="$darkBlue800" bold size="xl">
+            Similar Words
+          </Text>
+        </Box>
+      </Pressable>
+
       <Box
-        bg="$teal400"
+        bg="$backgroundLight200"
         p="$5"
         h={120}
         sx={{justifyContent: 'center', alignItems: 'center'}}>
         <Text color="$darkBlue800" bold size="xl">
-          Similar Words
-        </Text>
-      </Box>
-      <Box
-        bg="$darkBlue800"
-        p="$5"
-        h={120}
-        sx={{justifyContent: 'center', alignItems: 'center'}}>
-        <Text color="white" bold size="xl">
           This is the Box
         </Text>
       </Box>
@@ -33,7 +38,7 @@ const HowItWorks = () => {
         </Text>
       </Box>
       <Box
-        bg="$pink600"
+        bg="$backgroundLight200"
         p="$5"
         h={120}
         sx={{justifyContent: 'center', alignItems: 'center'}}>
@@ -41,6 +46,11 @@ const HowItWorks = () => {
           This is the Box
         </Text>
       </Box>
+
+      <SimilarWordsInfoModal
+        isSimModalOpen={isSimModalOpen}
+        setIsSimModalOpen={setIsSimModalOpen}
+      />
     </Box>
   );
 };
