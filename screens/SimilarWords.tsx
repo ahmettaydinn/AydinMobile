@@ -7,9 +7,8 @@ import {Button} from '@gluestack-ui/themed';
 const SimilarWords = () => {
   const navigation = useNavigation();
 
-  // const [score, setScore] = useState(0);
   const [currentWord, setCurrentWord] = useState('');
-  const [matchedWords, setMatchedWords] = useState([]);
+  const [matchedWords, setMatchedWords] = React.useState<string[]>([]);
   const [part, setPart] = useState(0);
   const haveFinished =
     matchedWords.length === similarWords[part].answers.length;
@@ -43,13 +42,10 @@ const SimilarWords = () => {
                 <Box
                   sx={{
                     borderWidth: 3,
-                    // padding: 20,
                     gap: 20,
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: 120,
-                    justifyContent: 'center',
-                    alignItems: 'center',
                     marginBottom: 10,
                     backgroundColor:
                       currentWord === answer || foundWord

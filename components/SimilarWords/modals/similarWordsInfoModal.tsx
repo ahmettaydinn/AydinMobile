@@ -1,3 +1,4 @@
+import React, {Dispatch, SetStateAction} from 'react';
 import {
   Button,
   ButtonText,
@@ -14,7 +15,12 @@ import {
 } from '@gluestack-ui/themed';
 import {Icon} from '@gluestack-ui/themed';
 
-const SimilarWordsInfoModal = ({isSimModalOpen, setIsSimModalOpen}) => {
+interface IProps {
+  isSimModalOpen: boolean;
+  setIsSimModalOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const SimilarWordsInfoModal = ({isSimModalOpen, setIsSimModalOpen}: IProps) => {
   return (
     <Modal isOpen={isSimModalOpen}>
       <ModalBackdrop />

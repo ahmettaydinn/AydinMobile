@@ -1,4 +1,15 @@
-export const similarWords = [
+interface IsentenceType {
+  sentence: string;
+  answer: string;
+}
+interface ISimilarWord {
+  sentences: IsentenceType[];
+  answers: string[];
+}
+
+type similarWordsType = ISimilarWord[];
+
+export const similarWords: similarWordsType = [
   {
     sentences: [
       {sentence: 'We passed _ the forest', answer: 'through'},

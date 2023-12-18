@@ -1,11 +1,20 @@
+import React from 'react';
 import {Box, Center, Pressable, Text} from '@gluestack-ui/themed';
-import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+// import {useNavigation} from '@react-navigation/native';
+import {HomeStackParamList, RootStackParamList} from '../App';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {CompositeScreenProps} from '@react-navigation/native';
 
-const Home = () => {
-  const navigation = useNavigation();
+type HomeScreenNavigationProp = CompositeScreenProps<
+  BottomTabScreenProps<HomeStackParamList, 'Home'>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
+const Home = ({navigation}: HomeScreenNavigationProp) => {
+  // const navigation = useNavigation();
   const navigateToChooseGame = () => {
-    navigation.navigate('GamesStack');
+    navigation.navigate('GamesStack', {screen: 'Games'});
   };
   const navigateToHowItWorks = () => {
     navigation.navigate('HowItWorks');

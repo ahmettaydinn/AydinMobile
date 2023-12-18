@@ -1,9 +1,13 @@
 import {Box, Center, Pressable, Text} from '@gluestack-ui/themed';
-import {useNavigation} from '@react-navigation/native';
+// import {useNavigation} from '@react-navigation/native';
 import React from 'react';
+import {GameStackParamList} from '../App';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-const ChooseGame = () => {
-  const navigation = useNavigation();
+type Props = NativeStackScreenProps<GameStackParamList, 'Games', 'GamesStack'>;
+
+const ChooseGame = ({navigation}: Props) => {
+  // const navigation = useNavigation();
 
   const navigateSimilarWords = () => {
     navigation.navigate('SimilarWords');
