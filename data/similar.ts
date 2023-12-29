@@ -14,7 +14,7 @@ export const similarWords: similarWordsType = [
     sentences: [
       {sentence: 'We passed _ the forest', answer: 'through'},
       {sentence: 'He is stupid, I like him _', answer: 'Though'},
-      {sentence: 'Wrestler girl is _', answer: 'Tough'},
+      {sentence: 'Wrestler girls are _', answer: 'Tough'},
     ],
     answers: ['through', 'Tough', 'Though'],
   },
