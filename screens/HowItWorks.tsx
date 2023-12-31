@@ -1,6 +1,6 @@
 import {Box, Pressable, Text} from '@gluestack-ui/themed';
 import React, {useState} from 'react';
-import SimilarWordsInfoModal from '../components/similarWords/modals/similarWordsInfoModal';
+import SimilarWordsInfoModal from '../components/SimilarWords/modals/similarWordsInfoModal';
 
 const HowItWorks = () => {
   const [isSimModalOpen, setIsSimModalOpen] = useState(false);
