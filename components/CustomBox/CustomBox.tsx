@@ -5,7 +5,7 @@ import styles from './CustomBoxStyle'
 
 type Props = {
     title: string,
-    boxColor: string
+    boxColor?: string
 }
 
 const CustomBox = ({ title, boxColor }: Props) => {

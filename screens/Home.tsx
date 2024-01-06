@@ -8,6 +8,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import CustomButton from '../components/CustomButton/CustomButton';
 import CustomBox from '../components/CustomBox/CustomBox';
+import CustomRectangle from '../components/CustomRectangle/CustomRectangle';
 
 type HomeScreenNavigationProp = CompositeScreenProps<
   BottomTabScreenProps<HomeStackParamList, 'Home'>,
@@ -29,20 +30,12 @@ const Home = ({ navigation }: HomeScreenNavigationProp) => {
           <Text color="white" sx={{ textAlign: 'center' }}>
             Start Playing
           </Text>
-
         </Box>
       </Pressable>
       {/*  */}
-      <View style={{ flexDirection: 'row' }}>
-        <View >
-          <CustomBox boxColor='red' title='We passed _ the forest' ></CustomBox>
-          <CustomBox boxColor='red' title='SELAM' ></CustomBox>
-        </View>
-        <View>
-          <CustomBox boxColor='red' title='SELAM' ></CustomBox>
-          <CustomBox boxColor='red' title='SELAM' ></CustomBox>
-        </View>
-      </View>
+      <CustomBox title='Deneme'></CustomBox>
+      <CustomButton theme='primaryButton' title='Start'></CustomButton>
+      <CustomRectangle title='Deneme' bgColor='#FFEACA'></CustomRectangle>
       <Pressable onPress={navigateToHowItWorks}>
         <Box bg="$teal500" p="$5" w={200} mt={5}>
           <Text color="white" sx={{ textAlign: 'center' }}>
@@ -50,8 +43,7 @@ const Home = ({ navigation }: HomeScreenNavigationProp) => {
           </Text>
         </Box>
       </Pressable>
-      <CustomButton theme='secondaryButton' title='Start' onPress={() => { console.log("sa") }}></CustomButton>
-      <CustomButton theme='primaryButton' title='Start' onPress={() => { console.log("sa") }}></CustomButton>
+
     </Center>
   );
 };

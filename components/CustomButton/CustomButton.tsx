@@ -5,8 +5,8 @@ import styles from './CustomButtonStyle'
 
 type Props = {
     title: string,
-    onPress: () => void;
-    disabled: boolean | null | undefined,
+    onPress?: () => void;
+    disabled?: boolean | null | undefined,
     theme: 'primaryButton' | 'secondaryButton'
 
 }

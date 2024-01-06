@@ -6,7 +6,7 @@ const base_style = StyleSheet.create({
     button: {
         width: width * .8,
         height: 50,
-        padding: 15,
+        justifyContent:'center',
         alignItems: 'center',
         backgroundColor: '#9DFF7A',
         marginHorizontal: 10,
@@ -15,6 +15,7 @@ const base_style = StyleSheet.create({
     text: {
         color: 'black',
         fontWeight: 'bold',
+        fontSize: 26,
         textAlign: 'center'
     }
 })
@@ -34,8 +35,6 @@ export default {
         },
         text: {
             ...base_style.text,
-
-
         }
     })
 }
