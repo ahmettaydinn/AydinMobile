@@ -1,14 +1,12 @@
 import { View } from 'react-native'
 import React from 'react';
-import { Box, Center, Pressable, Text } from '@gluestack-ui/themed';
-// import {useNavigation} from '@react-navigation/native';
-import { HomeStackParamList, RootStackParamList } from '../App';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps } from '@react-navigation/native';
-import CustomButton from '../components/CustomButton/CustomButton';
-import CustomBox from '../components/CustomBox/CustomBox';
-import CustomRectangle from '../components/CustomRectangle/CustomRectangle';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {CompositeScreenProps} from '@react-navigation/native';
+
+import {HomeStackParamList, RootStackParamList} from '../App';
 
 type HomeScreenNavigationProp = CompositeScreenProps<
   BottomTabScreenProps<HomeStackParamList, 'Home'>,
@@ -20,32 +18,48 @@ const Home = ({ navigation }: HomeScreenNavigationProp) => {
   const navigateToChooseGame = () => {
     navigation.navigate('GamesStack', { screen: 'Games' });
   };
+
   const navigateToHowItWorks = () => {
     navigation.navigate('HowItWorks');
   };
-  return (
-    <Center sx={{ flex: 1 }} bg="backgroundLight200">
-      <Pressable onPress={navigateToChooseGame}>
-        <Box bg="$teal500" p="$5" w={200} mb={5}>
-          <Text color="white" sx={{ textAlign: 'center' }}>
-            Start Playing
-          </Text>
-        </Box>
-      </Pressable>
-      {/*  */}
-      <CustomBox title='Deneme'></CustomBox>
-      <CustomButton theme='primaryButton' title='Start'></CustomButton>
-      <CustomRectangle title='Deneme' bgColor='#FFEACA'></CustomRectangle>
-      <Pressable onPress={navigateToHowItWorks}>
-        <Box bg="$teal500" p="$5" w={200} mt={5}>
-          <Text color="white" sx={{ textAlign: 'center' }}>
-            How The App Works
-          </Text>
-        </Box>
-      </Pressable>
 
-    </Center>
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={navigateToChooseGame}>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>Start Playing</Text>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={navigateToHowItWorks}>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>How The App Works</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  button: {
+    padding: 15,
+    width: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    backgroundColor: '#008080',
+    marginTop: 10,
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+  },
+});
 
 export default Home;

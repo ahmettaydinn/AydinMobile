@@ -1,25 +1,17 @@
-// team member: Sinan
-//sgamzeo
-// team member: Ahmet
-//okan
 import * as React from 'react';
+
 import {
   NavigationContainer,
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './screens/Home';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import HomeScreen from './screens/Home';
 import SimilarWords from './screens/SimilarWords';
 import ChooseGame from './screens/ChooseGame';
-import {GluestackUIProvider} from '@gluestack-ui/themed';
-import {config} from '@gluestack-ui/config';
 import HowItWorks from './screens/HowItWorks';
-// import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-
-// https://javascript.plainenglish.io/react-navigation-v6-with-typescript-5c9c065d45a5
-// https://javascript.plainenglish.io/react-navigation-v6-with-typescript-nested-navigation-part-2-87844f643e37
 
 export type GameStackParamList = {
   Games: undefined;
@@ -27,17 +19,6 @@ export type GameStackParamList = {
 };
 
 const GameStack = createNativeStackNavigator<GameStackParamList>();
-
-// const gamesRoutes: Array<React.ComponentProps<typeof GameStack.Screen>> = [
-//   {
-//     name: 'Games',
-//     component: ChooseGame,
-//   },
-//   {
-//     name: 'SimilarWords',
-//     component: SimilarWords,
-//   },
-// ];
 
 function GameStackScreen() {
   return (
@@ -54,25 +35,12 @@ function GameStackScreen() {
   );
 }
 
-// -------------------------------------------------------------------
-
 export type HomeStackParamList = {
   Home: undefined;
   HowItWorks: undefined;
 };
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
-
-// const homeRoutes: Array<React.ComponentProps<typeof HomeStack.Screen>> = [
-//   {
-//     name: 'Home',
-//     component: HomeScreen,
-//   },
-//   {
-//     name: 'HowItWorks',
-//     component: HowItWorks,
-//   },
-// ];
 
 function HomeStackScreen() {
   return (
@@ -95,7 +63,6 @@ function HomeStackScreen() {
   );
 }
 
-// -------------------------------------------------------------
 export type RootStackParamList = {
   HomeStack: NavigatorScreenParams<HomeStackParamList>;
   GamesStack: NavigatorScreenParams<GameStackParamList>;
@@ -132,13 +99,11 @@ function MyTabs() {
   );
 }
 
-function App(): JSX.Element {
+function App(): React.JSX.Element {
   return (
-    <GluestackUIProvider config={config}>
-      <NavigationContainer>
-        <MyTabs />
-      </NavigationContainer>
-    </GluestackUIProvider>
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
   );
 }
 

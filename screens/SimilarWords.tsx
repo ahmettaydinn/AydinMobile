@@ -1,77 +1,65 @@
 import React, {useState} from 'react';
-import {similarWords} from '../data/similar';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+
 import {useNavigation} from '@react-navigation/native';
-import {Box, ButtonText, Pressable, Text} from '@gluestack-ui/themed';
-import {Button} from '@gluestack-ui/themed';
+
+import {similarWords} from '../data/similar';
 
 const SimilarWords = () => {
   const navigation = useNavigation();
 
   const [currentWord, setCurrentWord] = useState('');
-  const [matchedWords, setMatchedWords] = React.useState<string[]>([]);
+  const [matchedWords, setMatchedWords] = useState<string[]>([]);
   const [part, setPart] = useState(0);
   const haveFinished =
     matchedWords.length === similarWords[part].answers.length;
 
   return (
-    <Box
-      sx={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-        padding: 20,
-      }}>
-      <Text size="4xl" sx={{marginBottom: 30}}>
+    <View style={styles.container}>
+      <Text style={styles.counter}>
         {matchedWords.length}/{similarWords[part].answers.length}
       </Text>
 
-      <Box
-        sx={{
-          flexDirection: 'row',
-          gap: 20,
-          flex: 1,
-        }}>
-        <Box sx={{width: '50%'}}>
+      <View style={styles.row}>
+        <View style={styles.column}>
           {similarWords[part].answers.map(answer => {
             const foundWord = matchedWords.find(wd => wd === answer);
             return (
-              <Pressable
+              <TouchableOpacity
                 onPress={() =>
                   setCurrentWord(currentWord === answer ? '' : answer)
-                }>
-                <Box
-                  sx={{
-                    borderWidth: 3,
-                    gap: 20,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: 120,
-                    marginBottom: 10,
-                    backgroundColor:
-                      currentWord === answer || foundWord
-                        ? '$pink600'
-                        : 'white',
-                  }}>
+                }
+                key={answer}>
+                <View
+                  style={[
+                    styles.box,
+                    {
+                      backgroundColor:
+                        currentWord === answer || foundWord
+                          ? '#FF69B4'
+                          : 'white',
+                    },
+                  ]}>
                   <Text
-                    color={
-                      currentWord === answer || foundWord ? 'white' : 'black'
-                    }>
+                    style={{
+                      color:
+                        currentWord === answer || foundWord ? 'white' : 'black',
+                    }}>
                     {answer}
                   </Text>
-                </Box>
-              </Pressable>
+                </View>
+              </TouchableOpacity>
             );
           })}
-        </Box>
+        </View>
 
-        {/*  */}
-        <Box sx={{width: '50%'}}>
+        <View style={styles.column}>
           {similarWords[part].sentences.map(sentenceObj => {
             const foundWord = matchedWords.find(
               wd => wd === sentenceObj.answer,
             );
             return (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   if (currentWord === sentenceObj.answer) {
                     if (!matchedWords.includes(sentenceObj.answer)) {
@@ -82,31 +70,28 @@ const SimilarWords = () => {
                   } else {
                     return;
                   }
-                }}>
-                <Box
-                  sx={{
-                    borderWidth: 3,
-                    padding: 10,
-                    gap: 20,
-                    height: 120,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginBottom: 10,
-                    backgroundColor: foundWord ? '$pink600' : 'white',
-                  }}>
-                  <Text color={foundWord ? 'white' : 'black'}>
+                }}
+                key={sentenceObj.sentence}>
+                <View
+                  style={[
+                    styles.box,
+                    {
+                      backgroundColor: foundWord ? '#FF69B4' : 'white',
+                    },
+                  ]}>
+                  <Text style={{color: foundWord ? 'white' : 'black'}}>
                     {sentenceObj.sentence}
                   </Text>
-                </Box>
-              </Pressable>
+                </View>
+              </TouchableOpacity>
             );
           })}
-        </Box>
-      </Box>
+        </View>
+      </View>
 
       {similarWords.length - 1 !== part ? (
-        <Button
-          bg="$darkBlue800"
+        <TouchableOpacity
+          style={[styles.button, {backgroundColor: '#001f3f'}]}
           disabled={!haveFinished}
           onPress={() => {
             if (haveFinished) {
@@ -115,22 +100,62 @@ const SimilarWords = () => {
               setPart(part + 1);
             }
           }}>
-          <ButtonText> Next </ButtonText>
-        </Button>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       ) : (
-        <Button
-          bg="$darkBlue800"
+        <TouchableOpacity
+          style={[styles.button, {backgroundColor: '#001f3f'}]}
           disabled={!haveFinished}
           onPress={() => {
             if (haveFinished) {
               navigation.goBack();
             }
           }}>
-          <ButtonText> End </ButtonText>
-        </Button>
+          <Text style={styles.buttonText}>End</Text>
+        </TouchableOpacity>
       )}
-    </Box>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  counter: {
+    fontSize: 30,
+    marginBottom: 30,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  column: {
+    width: '50%',
+  },
+  box: {
+    borderWidth: 3,
+    padding: 10,
+    height: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  button: {
+    padding: 15,
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#001f3f',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+  },
+});
 
 export default SimilarWords;
